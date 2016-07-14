@@ -1,2 +1,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+body {
+    padding-top: 225px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.navbar-inverse {
+  background-color: white;
+}

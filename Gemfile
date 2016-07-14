@@ -3,10 +3,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
+# Sass port of Bootstrap 2 and 3
+gem 'bootstrap-sass'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
-# Sass port of Bootstrap 2 and 3
-gem 'boostrap-sass'
 # Tool to parse CSS and add vendor prefixes to CSS rules
 gem 'autoprefixer-rails'
 # Use SCSS for stylesheets
