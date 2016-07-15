@@ -1,0 +1,32 @@
+<div class="col-md-2 col-md-offset-4">
+  <%= render 'sessions/new' %>
+</div>
+
+<div class="col-md-3">
+  <h3>Register</h3>
+<%= form_for new_user_path do |f| %>
+  <div class="field">
+    <%= f.label :xbox_gamertag %><br />
+    <%= f.text_field :xbox_gamertag %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "false" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "register" %><br />
+  </div>
+<% end %>
+</div>
