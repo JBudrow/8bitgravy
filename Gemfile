@@ -17,8 +17,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-# A wrapper gem for xboxapi.com
+# An XBOX API wrapper that allows once to fetch profiles, games, achievements and friends data
 gem 'xbox-api'
+# Makes http fun! Also, makes consuming restful web services dead easy
+gem 'httparty'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -43,6 +45,8 @@ group :development, :test do
   gem 'byebug'
   # Loads environment variables from `.env`
   gem 'dotenv-rails'
+  # An IRB alternative and runtime developer console
+  gem 'pry'
 end
 
 group :development do
