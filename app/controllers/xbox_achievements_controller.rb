@@ -1,0 +1,2 @@
+class XboxAchievementsController < ApplicationController
+end

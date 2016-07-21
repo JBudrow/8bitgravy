@@ -3,11 +3,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where(email: params[:email].first)
+    user = User.where(email: params[:email]).first
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to :root, notice: 'Signed in successfully'
+      redirect_to root_url, notice: 'Signed in successfully'
     else
       flash.now.alert = 'Invalid email or password'
       render :new

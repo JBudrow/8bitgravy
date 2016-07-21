@@ -1,6 +1,6 @@
 <h3>Sign in</h3>
 
-<%= form_for session_path do |f| %>
+<%= form_for @user do |f| %>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>

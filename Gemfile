@@ -21,7 +21,8 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'xbox-api'
 # Makes http fun! Also, makes consuming restful web services dead easy
 gem 'httparty'
-
+# Addressable is a replacement for the URI implementation that is part of Ruby's standard library
+gem 'addressable'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -30,7 +31,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+# A scope & engine based, clean, powerful, customizable and sophisticated paginator for Rails 3 and 4
+gem 'kaminari'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
