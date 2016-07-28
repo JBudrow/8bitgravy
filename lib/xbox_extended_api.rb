@@ -2,7 +2,6 @@ require 'uri'
 class XboxExtendedApi
   include HTTParty
   base_uri "https://xboxapi.com/v2"
-  default_params :output => 'json'
   format :json
   def initialize
     @headers = {
@@ -11,32 +10,26 @@ class XboxExtendedApi
     }
   end
 
-  def self.get_gamercard xuid
-    response = get("/#{xuid}/gamercard", headers: @headers)
-    encoded_url(response)
+  # Xbox games
+  def games xuid
+    XboxExtendedApi.get("/#{xuid}/xbox360games", headers: @headers)
   end
 
-  def self.get_gamertag_xuid gamertag
-    url = "https://xboxapi.com/v2/xuid/#{gamertag}"
-    encoded = URI.encode url
-    get("#{encoded}", headers: @headers)
+  # Xbox achievements
+  def achievements xuid, titleId
+    XboxExtendedApi.get("/#{xuid}/achievements/#{titleId}", headers: @headers)
   end
 
-  def self.get_achievements xuid, titleId
-    get("/#{xuid}/achievements/#{titleId}", headers: @headers)
+  # Xbox game meta
+  def meta hexId
+    XboxExtendedApi.get("/game-details-hex/#{hexId}", headers: @headers)
   end
 
-  def self.get_friends xuid
-    get("/#{xuid}/friends", headers: @headers)
-  end
-
-  def self.get_xbox360_games xuid
-    response = get("/#{xuid}/xbox360games", headers: @headers)
-  end
-
-  def self.get_games_titles games_data
-    games_data[:titles].map do |game|
-      game[:name]
-    end
+  # Acquire Xbox game's image url
+  def image_meta hexId
+    response = meta hexId
+    nested_image = response["Items"].map { |attribute| attribute["Images"] }
+    sort_image = nested_image.flatten.delete_if { |hash| hash["Height"] != 300 }
+    url = sort_image[0]["Url"]
   end
 end

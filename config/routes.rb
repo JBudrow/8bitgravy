@@ -2,10 +2,13 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resource :session, only: [:new, :create, :destroy]
-  resources :users
+  resources :achievements
+  resources :users do
+    resources :xbox_games
+  end
 
   # You can have the root of your site routed with "root"
-  root 'dashboard#index'
+  root 'xbox_games#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

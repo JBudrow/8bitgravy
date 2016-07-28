@@ -1,0 +1,60 @@
+<div class="container" style="max-width:970px;">
+
+  <div class="row">
+    <div class="col-md-8" style="margin-top: 3em;">
+    <% @games.each do |game| %>
+      <div class="col-md-3">
+        <div class="row">
+          <img class="game-image img-responsive" src="<%= @custom_api.image_meta game.hex_id %>" />
+        </div>
+        <div class="row">
+          <!-- <%= game.name %> -->
+          <p><span class="glyphicon glyphicon-time"></span> Last played on <%= game.last_played.strftime("%m/%d/%Y") %></p>
+          <p><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/gamerscore_zps5uysjgb2.png", :style => "padding-right: 3px") %></span><%= game.current_gamerscore %> / <%= game.total_gamerscore %></p>
+          <p><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/achievement_zpsmd7srxoc.png", :style => "padding-right: 3px") %></span><%= game.current_achievements %> / <%= game.total_achievements %></p>
+        </div>
+        <hr>
+      </div>
+    <% end %>
+  </div>
+
+    <div class="row">
+    <div class="col-md-4">
+      <div>
+        <p><img src="https://www.mygamerprofile.net/card/greybar/mr+Budrow.png" style="width:293px;" /></p>
+      </div>
+
+      <div class="well">
+      <h4>Category</h4>
+        <div class="row">
+          <div class="col-lg-6">
+            <ul class="list-unstyled">
+              <li><a href="#">Platinum</a></li>
+              <li><a href="#">Gold</a></li>
+              <li><a href="#">Silver</a></li>
+              <li><a href="#">Bronze</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-6">
+            <ul class="list-unstyled">
+              <li><a href="#">N/A</a></li>
+              <li><a href="#">N/A</a></li>
+              <li><a href="#">N/A</a></li>
+              <li><a href="#">N/A</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="well">
+        <h4>Nerd Alerts</h4>
+        <a class="twitter-timeline"  href="https://twitter.com/gameinformer" data-widget-id="734888756453494784">Tweets by @gameinformer</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<%= paginate @games %>
