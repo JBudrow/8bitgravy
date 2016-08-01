@@ -5,11 +5,13 @@
     <% @games.each do |game| %>
       <div class="col-md-3">
         <div class="row">
+          <%= link_to user_xbox_game_path(current_user, game) do %>
           <img class="game-image img-responsive" src="<%= @custom_api.image_meta game.hex_id %>" />
+          <% end %>
         </div>
         <div class="row">
           <!-- <%= game.name %> -->
-          <p><span class="glyphicon glyphicon-time"></span> Last played on <%= game.last_played.strftime("%m/%d/%Y") %></p>
+          <!-- <p><span class="glyphicon glyphicon-time"></span> Last played on <%= game.last_played.strftime("%m/%d/%Y") %></p> -->
           <p><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/gamerscore_zps5uysjgb2.png", :style => "padding-right: 3px") %></span><%= game.current_gamerscore %> / <%= game.total_gamerscore %></p>
           <p><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/achievement_zpsmd7srxoc.png", :style => "padding-right: 3px") %></span><%= game.current_achievements %> / <%= game.total_achievements %></p>
         </div>
@@ -21,7 +23,7 @@
     <div class="row">
     <div class="col-md-4">
       <div>
-        <p><img src="https://www.mygamerprofile.net/card/greybar/mr+Budrow.png" style="width:293px;" /></p>
+        <p><img src="http://card.xboxgamertag.com/gamercard/THROWXDOWN/oldxbox/card.png" style="width:293px;" /></p>
       </div>
 
       <div class="well">
@@ -48,7 +50,6 @@
       </div>
 
       <div class="well">
-        <h4>Nerd Alerts</h4>
         <a class="twitter-timeline"  href="https://twitter.com/gameinformer" data-widget-id="734888756453494784">Tweets by @gameinformer</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </div>

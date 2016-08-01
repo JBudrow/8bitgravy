@@ -1,5 +1,6 @@
 require 'pry'
 class XboxGamesController < ApplicationController
+  # set before action for updating game table via show?
   before_action :authenticate
   include XboxGamesHelper
 
@@ -9,6 +10,8 @@ class XboxGamesController < ApplicationController
   end
 
   def show
-    @game = XboxGame.find id: params[:id]
+    @custom_api = XboxExtendedApi.new
+    @game = XboxGame.find params[:id]
+    @custom_api.sort_meta @game.hex_id, @game
   end
 end
