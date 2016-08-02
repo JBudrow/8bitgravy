@@ -30,20 +30,33 @@ class XboxExtendedApi
     extract_digits = date.scan(/\d+/).first
     converted_unix = extract_digits.to_i / 1000
     Time.at converted_unix
-    # date.strftime("%B %d, %Y")
   end
 
   # Sort and collect Xbox game meta
-  def sort_meta hexId, game
+  def game_meta hexId, game
     response = meta hexId
 
     response["Items"].map do |attribute|
       game.update_attributes genre: attribute["Genres"][0]["Name"],
-                             sub_genre: attribute["Genres"][1]["Name"],
                              publisher: attribute["PublisherName"],
                              developer: attribute["DeveloperName"],
                              release_date: convert_time(attribute["ReleaseDate"]),
                              description: attribute["Description"]
+    end
+  end
+
+  # Acquire Xbox game's achievements
+  def achievement_meta xuid, titleId, game
+    response = achievements xuid, titleId
+
+    response.map do |attribute|
+      game.achievements.new          name: attribute["name"],
+                                     url: attribute["imageUnlocked"],
+                                     unlocked_online: attribute["unlockedOnline"],
+                                     unlocked: attribute["unlocked"],
+                                     value: attribute["gamerscore"],
+                                     time_unlocked: attribute["timeUnlocked"],
+                                     description: attribute["description"]
     end
   end
 
