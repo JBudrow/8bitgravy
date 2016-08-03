@@ -41,7 +41,7 @@ class XboxExtendedApi
                              publisher: attribute["PublisherName"],
                              developer: attribute["DeveloperName"],
                              release_date: convert_time(attribute["ReleaseDate"]),
-                             description: attribute["Description"]
+                             description: attribute["ReducedDescription"]
     end
   end
 
@@ -56,7 +56,8 @@ class XboxExtendedApi
                                      unlocked: attribute["unlocked"],
                                      value: attribute["gamerscore"],
                                      time_unlocked: attribute["timeUnlocked"],
-                                     description: attribute["description"]
+                                     description: attribute["description"],
+                                     is_secret: attribute["isSecret"]
     end
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160726184219) do
+ActiveRecord::Schema.define(version: 20160802185215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160726184219) do
     t.boolean "unlocked"
     t.boolean "unlocked_online"
     t.text    "description"
+    t.boolean "is_secret"
   end
 
   add_index "achievements", ["xbox_game_id"], name: "index_achievements_on_xbox_game_id", using: :btree

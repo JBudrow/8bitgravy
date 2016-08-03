@@ -16,6 +16,7 @@
       <hr>
 
       <% @game.achievements.each do |achievement| %>
+      <% if achievement.unlocked == true %>
       <div class="row" style="padding-bottom:5px;">
         <div class="col-md-2">
           <img src="<%= achievement.url %>" />
@@ -23,11 +24,45 @@
         <div class="col-md-10">
           <h4 class="page-header" style="margin-top:0px;margin-bottom:0px;padding-bottom:2px;"><%= achievement.name %>
           <p style="margin-bottom:5px;float: right;font-size: 15px;"><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/gamerscore_zps5uysjgb2.png", :style => "padding-right: 3px;padding-bottom: 2px;") %></span><%= achievement.value %></p></h4>
+          <p><span class="glyphicon glyphicon-time"></span> Unlocked <%= achievement.time_unlocked.strftime("%m/%d/%y") %></p>
           <p><%= achievement.description %></p>
         </div>
       </div>
       <% end %>
+      <% end %>
+
+    <h3 class="page-header">Locked Achievements</h3>
+    <% @game.achievements.each do |achievement| %>
+    <% if achievement.unlocked == false %>
+    <div class="row" style="padding-bottom:5px;">
+      <div class="col-md-2">
+        <img src="<%= achievement.url %>" />
+      </div>
+      <div class="col-md-10">
+        <h4 class="page-header" style="margin-top:0px;margin-bottom:0px;padding-bottom:2px;"><%= achievement.name %>
+        <p style="margin-bottom:5px;float: right;font-size: 15px;"><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/gamerscore_zps5uysjgb2.png", :style => "padding-right: 3px;padding-bottom: 2px;") %></span><%= achievement.value %></p></h4>
+        <p><%= achievement.description %></p>
+      </div>
     </div>
+    <% end %>
+    <% end %>
+
+    <h3 class="page-header">Secret</h3>
+    <% @game.achievements.each do |achievement| %>
+    <% if achievement.is_secret == true %>
+    <div class="row" style="padding-bottom:5px;">
+      <div class="col-md-2">
+        <img src="<%= achievement.url %>" />
+      </div>
+      <div class="col-md-10">
+        <h4 class="page-header" style="margin-top:0px;margin-bottom:0px;padding-bottom:2px;"><%= achievement.name %>
+        <p style="margin-bottom:5px;float: right;font-size: 15px;"><span><%= image_tag("http://i194.photobucket.com/albums/z37/scabbabca/gamerscore_zps5uysjgb2.png", :style => "padding-right: 3px;padding-bottom: 2px;") %></span><%= achievement.value %></p></h4>
+        <p><%= achievement.description %></p>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
 
     <div class="col-md-4">
       <div id="xbox-gamercard" class="well">
