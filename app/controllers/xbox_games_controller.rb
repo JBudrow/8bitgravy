@@ -13,6 +13,6 @@ class XboxGamesController < ApplicationController
     @custom_api = XboxExtendedApi.new
     @game = XboxGame.find params[:id]
     @custom_api.game_meta @game.hex_id, @game
-    @custom_api.achievement_meta current_user.xuid, @game.title_id, @game 
+    @custom_api.achievement_meta current_user.xuid, @game.title_id, @game
   end
 end
