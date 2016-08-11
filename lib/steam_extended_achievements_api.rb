@@ -13,7 +13,18 @@ class SteamExtendedAchievementsApi
     end
 
     # Get game schema
-    # game = SteamWebApi::Gamenew gameid
-    # schema = game.schema
+    game_ids.each do |id|
+      game = SteamWebApi::Game.new id
+      schema = game.schema
+      schema.achievements.map do |meta|
+        SteamAchievement.find_or_create_by name: meta["name"],
+          display_name: meta["displayName"],
+          default_value: meta["default_value"],
+          hidden: meta["hidden"],
+          description: meta["description"],
+          icon: meta["icon"],
+          icon_gray: meta["icongray"]
+      end
+    end
   end
 end

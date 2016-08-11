@@ -1,9 +1,11 @@
 require 'HTTParty'
 class SteamExtendedGamesApi
   def initialize user, vanity
+    # Get Vanity URL id for single player
     steam_hash = HTTParty.get "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/",
                               :query => { 'key' => ENV['STEAM_AUTH'], 'vanityurl' => vanity }
     steam_id = steam_hash['response']['steamid']
+    # Get account summary for single player
     player = SteamWebApi::Player.new steam_id
     data = player.summary.to_h[:profile]
     user.update_attributes steamid: data['steamid'],
@@ -13,6 +15,7 @@ class SteamExtendedGamesApi
        avatar_medium: data['avatarmedium'],
        avatar_full: data['avatarfull']
 
+    # Get Steam identifier for user
     steam_api = player.owned_games(include_played_free_games: true, include_appinfo: true).games
     steam_api.collect do |game|
       SteamGame.find_or_create_by user_id: user.id,
