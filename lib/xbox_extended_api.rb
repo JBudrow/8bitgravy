@@ -38,10 +38,10 @@ class XboxExtendedApi
 
     response["Items"].map do |attribute|
       game.update_attributes genre: attribute["Genres"][0]["Name"],
-                             publisher: attribute["PublisherName"],
-                             developer: attribute["DeveloperName"],
-                             release_date: convert_time(attribute["ReleaseDate"]),
-                             description: attribute["ReducedDescription"]
+       publisher: attribute["PublisherName"],
+       developer: attribute["DeveloperName"],
+       release_date: convert_time(attribute["ReleaseDate"]),
+       description: attribute["ReducedDescription"]
     end
   end
 
@@ -50,14 +50,14 @@ class XboxExtendedApi
     response = achievements xuid, titleId
 
     response.map do |attribute|
-      game.achievements.new          name: attribute["name"],
-                                     url: attribute["imageUnlocked"],
-                                     unlocked_online: attribute["unlockedOnline"],
-                                     unlocked: attribute["unlocked"],
-                                     value: attribute["gamerscore"],
-                                     time_unlocked: attribute["timeUnlocked"],
-                                     description: attribute["description"],
-                                     is_secret: attribute["isSecret"]
+      game.achievements.new name: attribute["name"],
+       url: attribute["imageUnlocked"],
+       unlocked_online: attribute["unlockedOnline"],
+       unlocked: attribute["unlocked"],
+       value: attribute["gamerscore"],
+       time_unlocked: attribute["timeUnlocked"],
+       description: attribute["description"],
+       is_secret: attribute["isSecret"]
     end
   end
 

@@ -19,6 +19,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 # An XBOX API wrapper that allows once to fetch profiles, games, achievements and friends data
 gem 'xbox-api'
+# This is a gem that makes trivial interacting with the Steam Web API
+gem 'steam_web_api'
 # Makes http fun! Also, makes consuming restful web services dead easy
 gem 'httparty'
 # Addressable is a replacement for the URI implementation that is part of Ruby's standard library
