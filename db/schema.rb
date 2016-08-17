@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160808183941) do
+ActiveRecord::Schema.define(version: 20160815212525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,41 @@ ActiveRecord::Schema.define(version: 20160808183941) do
   end
 
   add_index "achievements", ["xbox_game_id"], name: "index_achievements_on_xbox_game_id", using: :btree
+
+  create_table "playstation_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "name"
+    t.string  "np_communication_id"
+    t.string  "url"
+    t.string  "platform"
+    t.integer "defined_bronze"
+    t.integer "defined_silver"
+    t.integer "defined_gold"
+    t.integer "defined_platinum"
+    t.integer "progress"
+    t.integer "earned_bronze"
+    t.integer "earned_silver"
+    t.integer "earned_gold"
+    t.integer "earned_platinum"
+    t.date    "last_played"
+  end
+
+  add_index "playstation_games", ["user_id"], name: "index_playstation_games_on_user_id", using: :btree
+
+  create_table "playstation_trophies", force: :cascade do |t|
+    t.integer "playstation_game_id"
+    t.string  "name"
+    t.string  "detail"
+    t.string  "type"
+    t.string  "url"
+    t.integer "rarity"
+    t.string  "earned_rate"
+    t.boolean "earned"
+    t.date    "time_unlocked"
+    t.boolean "is_hidden"
+  end
+
+  add_index "playstation_trophies", ["playstation_game_id"], name: "index_playstation_trophies_on_playstation_game_id", using: :btree
 
   create_table "steam_achievements", force: :cascade do |t|
     t.integer "steam_game_id"
@@ -71,6 +106,7 @@ ActiveRecord::Schema.define(version: 20160808183941) do
     t.string   "avatar"
     t.string   "avatar_medium"
     t.string   "avatar_full"
+    t.string   "psn_gamertag"
   end
 
   create_table "xbox_games", force: :cascade do |t|
@@ -96,6 +132,8 @@ ActiveRecord::Schema.define(version: 20160808183941) do
   add_index "xbox_games", ["user_id"], name: "index_xbox_games_on_user_id", using: :btree
 
   add_foreign_key "achievements", "xbox_games"
+  add_foreign_key "playstation_games", "users"
+  add_foreign_key "playstation_trophies", "playstation_games"
   add_foreign_key "steam_achievements", "steam_games"
   add_foreign_key "steam_games", "users"
   add_foreign_key "xbox_games", "users"

@@ -1,0 +1,2 @@
+class PlaystationGames < ApplicationController
+end

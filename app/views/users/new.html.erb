@@ -11,7 +11,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :psn_gamertag %><br />
+    <%= f.text_field :psn_gamertag %>
+  </div>
+
+  <div class="field">
+    <%= f.label :steam_gamertag %><br />
+    <%= f.text_field :steam_gamertag %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br /> 
     <%= f.email_field :email, autofocus: true %>
   </div>
 

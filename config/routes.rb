@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   # You can have the root of your site routed with "root"
-  root 'xbox_games#index'
+  root 'dashboard#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

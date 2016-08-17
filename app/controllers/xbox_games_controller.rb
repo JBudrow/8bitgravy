@@ -5,7 +5,6 @@ class XboxGamesController < ApplicationController
   include XboxGamesHelper
 
   def index
-    binding.pry 
     @custom_api = XboxExtendedApi.new
     @games = current_user.xbox_games.page(params[:page]).per 12
   end
