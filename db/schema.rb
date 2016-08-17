@@ -66,16 +66,18 @@ ActiveRecord::Schema.define(version: 20160815212525) do
   add_index "playstation_trophies", ["playstation_game_id"], name: "index_playstation_trophies_on_playstation_game_id", using: :btree
 
   create_table "steam_achievements", force: :cascade do |t|
-    t.integer "steam_game_id"
-    t.string  "name"
-    t.string  "default_value"
-    t.string  "display_name"
-    t.string  "description"
-    t.string  "icon"
-    t.string  "icon_gray"
-    t.string  "percent"
-    t.integer "hidden"
-    t.integer "achieved"
+    t.integer  "steam_game_id"
+    t.string   "name"
+    t.string   "default_value"
+    t.string   "display_name"
+    t.string   "description"
+    t.string   "icon"
+    t.string   "icon_gray"
+    t.string   "percent"
+    t.integer  "hidden"
+    t.integer  "achieved"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "steam_achievements", ["steam_game_id"], name: "index_steam_achievements_on_steam_game_id", using: :btree

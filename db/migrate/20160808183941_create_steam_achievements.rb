@@ -10,7 +10,8 @@ class CreateSteamAchievements < ActiveRecord::Migration
       t.string :icon_gray
       t.string :percent
       t.integer :hidden
-      t.integer :achieved 
+      t.integer :achieved
+      t.timestamps
     end
   end
 end
