@@ -5,22 +5,22 @@ class UsersController < ApplicationController
   end
 
   def create
-    # Xbox client
+    # User client
     @user = User.new user_params
-    @xbox_gamer = XboxGame.gamer @user.xu_gamertag
-    @user.xuid = @xbox_gamer.xuid
+
+    # Xbox client
+    xbox_gamer = XboxExtendedApi.new @user.xu_gamertag
 
     # Playstation client
     psn_gamer = PSNExtendedApi.new @user.psn_gamertag
-    # @psn_library = psn_gamer.psn_games
 
     # Steam client
-    SteamExtendedGamesApi.new @user, @user.steam_gamertag
+    steam_gamer = SteamExtendedGamesApi.new @user
 
     if @user.save
-      XboxGame.store_games @xbox_gamer, @user
+      xbox_gamer.store_games @user.xu_gamertag, @user
       psn_gamer.store_psn_games @user.playstation_games
-      SteamExtendedAchievementsApi.new @user, @user.steamid
+      steam_gamer.store_steam_games @user
 
       flash[:success] = "Registration successful"
       redirect_to root_url

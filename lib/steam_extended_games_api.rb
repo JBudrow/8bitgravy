@@ -1,21 +1,28 @@
+require 'pry'
 require 'HTTParty'
 class SteamExtendedGamesApi
-  def initialize user, vanity
+  def initialize user
     # Get Vanity URL id for single player
     steam_hash = HTTParty.get "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/",
-                              :query => { 'key' => ENV['STEAM_AUTH'], 'vanityurl' => vanity }
-    steam_id = steam_hash['response']['steamid']
+                              :query => { 'key' => ENV['STEAM_AUTH'], 'vanityurl' => user.steam_gamertag }
     # Get account summary for single player
-    player = SteamWebApi::Player.new steam_id
+    user.steamid = steam_hash['response']['steamid']
+    player = SteamWebApi::Player.new user.steamid
     data = player.summary.to_h[:profile]
-    user.update_attributes steamid: data['steamid'],
-       steam_gamertag: data['personaname'],
-       steam_vanity_url: vanity,
-       avatar: data['avatar'],
-       avatar_medium: data['avatarmedium'],
-       avatar_full: data['avatarfull']
+    data.collect do |meta|
+      User.find_or_create_by id: user.id,
+         steam_gamertag: meta[3],
+         steam_vanity_url: user,
+         avatar: meta[6],
+         avatar_medium: meta[7],
+         avatar_full: meta[8]
+    end
+    user.save
+  end
 
-    # Get Steam identifier for user
+  # Get Steam identifier for user
+  def store_steam_games user
+    player = SteamWebApi::Player.new user.steamid
     steam_api = player.owned_games(include_played_free_games: true, include_appinfo: true).games
     steam_api.collect do |game|
       SteamGame.find_or_create_by user_id: user.id,

@@ -3,11 +3,18 @@ class XboxExtendedApi
   include HTTParty
   base_uri "https://xboxapi.com/v2"
   format :json
-  def initialize
+  def initialize xu_gamertag
+    @xu_gamertag = xu_gamertag
     @headers = {
       "X-Auth"     => ENV["XBOX_AUTH"],
       "User-Agent" => "HTTParty"
     }
+  end
+
+  # XboxApi client object
+  def account tag
+    client = XboxApi::Client.new ENV["XBOX_AUTH"]
+    gamer = client.gamer tag
   end
 
   # Xbox games
@@ -67,5 +74,21 @@ class XboxExtendedApi
     nested_image = response["Items"].map { |attribute| attribute["Images"] }
     sort_image = nested_image.flatten.delete_if { |hash| hash["Height"] != 300 }
     url = sort_image[0]["Url"]
+  end
+
+  # Store XboxApi games
+  def store_games name, user
+    response  = account(name).xbox360games
+
+    response[:titles].map do |game|
+      user.xbox_games.create name: game[:name],
+        title_id: game[:titleId],
+        hex_id: game[:titleId].to_i.to_s(16),
+        last_played: game[:lastPlayed],
+        current_achievements: game[:currentAchievements],
+        current_gamerscore: game[:currentGamerscore],
+        total_achievements: game[:totalAchievements],
+        total_gamerscore: game[:totalGamerscore]
+    end
   end
 end
